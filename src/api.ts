@@ -3,9 +3,7 @@ import {db} from './database'
 import {postsTable} from './db/schema'
 import {eq} from 'drizzle-orm'
 
-
 export const initializeAPI = (app: Express) => {
-  let posts = [{ id: 1, content: 'I feel like' }]
 
 // Auswahlfeld oder Menü auf der Root-Seite
 app.get('/', (req: Request, res: Response) => {
@@ -61,5 +59,4 @@ app.delete('/api/posts/:id', (req: Request, res: Response) => {
     db.delete(postsTable).where(eq(postsTable.id, id)).execute()
     res.send({ id })
 })
-
 }
