@@ -174,5 +174,6 @@ dist
 # Finder (MacOS) folder config
 .DS_Store
 
-# Eigene Daten
+# Custom
+docker-data
 README_WYO.md

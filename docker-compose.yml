@@ -1,0 +1,44 @@
+name: minitwitter
+services:
+  LoadBalancer:
+    # Setzt den Namen des Containers auf "webserver".
+    container_name: LoadBalancer
+    # Lädt das offizielle Nginx-Webserver-Image von Docker Hub.
+    image: nginx
+    # Container wird immer automatisch neugestartet, falls er stoppt.
+    restart: always
+    # Leitet Anfragen vom Host-Port 80 an den Container-Port 80 weiter
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    
+
+  my-postgres:
+    image: postgres
+    container_name: db
+    restart: always
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: supersecret123
+      POSTGRES_DB: minitwitter
+
+  minitwitter1:
+    image: wotasoy/simple-api
+    container_name: minitwitter1
+    restart: always
+    environment:
+      DATABASE_URL: postgressql://postgres:supersecret123@my-postgres:5432/minitwitter
+    volumes:
+      - ./docker-data/postgres:/var/lib/postgresql/data
+
+  minitwitter2:
+    image: wotasoy/simple-api
+    container_name: minitwitter2
+    restart: always
+    environment:
+      DATABASE_URL: postgressql://postgres:supersecret123@my-postgres:5432/minitwitter
+    volumes:
+      - ./docker-data/postgres:/var/lib/postgresql/data
+      

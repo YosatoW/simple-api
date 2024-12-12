@@ -89,3 +89,15 @@ git remote add origin <URL>
 // Holt Änderungen vom Remote, ohne sie zu integrieren.
 git fetch
 ````
+
+# docker
+````TypeScript
+docker compose up -d
+docker compose down
+````
+
+# drizzle-kit
+````TypeScript
+bunx drizzle-kit push
+bunx drizzle-kit studio
+````
